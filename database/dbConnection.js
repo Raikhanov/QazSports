@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-export const dbConnection = () => {
-  mongoose
-    .connect("mongodb+srv://qazsports09:Qazsports09@qazsports.7ffyl6z.mongodb.net/", {
+dotenv.config();
+
+export const dbConnection = async () => {
+  try {
+    console.log("URI:", process.env.MONGO_URI); // проверка
+
+    await mongoose.connect(process.env.MONGO_URI, {
       dbName: "qazsports",
-    })
-    .then(() => {
-      console.log("Подключено к базе данных!");
-    })
-    .catch((err) => {
-      console.log(`Произошла ошибка при подключении к базе данных: ${err}`);
     });
+
+    console.log("Подключено к базе данных!");
+  } catch (err) {
+    console.log(`Ошибка подключения: ${err.message}`);
+    process.exit(1);
+  }
 };
