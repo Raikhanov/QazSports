@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import path from "path";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import session from "express-session";
 import { User } from "./models/user.js";
 import { dbConnection } from "./database/dbConnection.js";
